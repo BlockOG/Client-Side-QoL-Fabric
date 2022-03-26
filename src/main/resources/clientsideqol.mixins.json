@@ -6,7 +6,7 @@
   "mixins": [
   ],
   "client": [
-    "QoLMixin"
+    "SegmentedHotbarMixin"
   ],
   "injectors": {
     "defaultRequire": 1

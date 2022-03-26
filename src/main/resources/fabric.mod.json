@@ -23,6 +23,9 @@
     ],
     "main": [
       "net.blockog.clientsideqol.ClientSideQoL"
+    ],
+    "client": [
+      "net.blockog.clientsideqol.CSQoLKeybinds"
     ]
   },
   "mixins": [
@@ -32,6 +35,7 @@
   "depends": {
     "fabricloader": ">=0.13.3",
     "fabric": "*",
+    "fabric-key-binding-api-v1": "*",
     "minecraft": "1.18.x",
     "java": ">=17"
   },
