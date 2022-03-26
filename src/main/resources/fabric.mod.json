@@ -9,10 +9,11 @@
     "BlockOG"
   ],
   "contact": {
+    "issues": "https://github.com/BlockOG/Client-Side-QoL-Fabric/issues",
     "sources": "https://github.com/BlockOG/Client-Side-QoL-Fabric/"
   },
 
-  "license": "GPU",
+  "license": "GNU",
   "icon": "assets/clientsideqol/icon.png",
 
   "environment": "*",

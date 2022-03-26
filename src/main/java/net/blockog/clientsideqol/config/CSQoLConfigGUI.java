@@ -6,7 +6,6 @@ import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
 public class CSQoLConfigGUI {
@@ -17,17 +16,30 @@ public class CSQoLConfigGUI {
         ConfigBuilder builder = ConfigBuilder.create().setParentScreen(parent).setTitle(Text.of("Client Side QoL"));
         builder.setDefaultBackgroundTexture(new Identifier("minecraft:textures/block/dirt.png"));
         builder.setSavingRunnable(() -> ClientSideQoL.getInstance().saveConfig());
-        ConfigCategory general = builder.getOrCreateCategory(Text.of("general"));
         ConfigEntryBuilder configEntryBuilder = builder.entryBuilder();
 
-        general.addEntry(
+        // Segmented Hotbar
+        ConfigCategory segmentedHotbar = builder.getOrCreateCategory(Text.of("Segmented Hotbar"));
+
+        segmentedHotbar.addEntry(
                 configEntryBuilder
-                        .startBooleanToggle(Text.of("Segmented Hotbar"), config.segmentedHotbar)
+                        .startBooleanToggle(Text.of("Segmented Hotbar Visual"), config.segmentedHotbarVisual)
                         .setDefaultValue(false)
-                        .setSaveConsumer(newValue -> config.setSegmentedHotbar(newValue))
-                        .setTooltip(Text.of("Divide hotbar into 3 sections, making it easy to select a slot with just 1-3\nDefault = false"))
+                        .setSaveConsumer(newValue -> config.setSegmentedHotbarVisual(newValue))
+                        .setTooltip(Text.of("Divide hotbar into 3 sections\n\nDefault: No"))
                         .build()
         );
+
+        segmentedHotbar.addEntry(
+                configEntryBuilder
+                        .startBooleanToggle(Text.of("Segmented Hotbar"), config.segmentedHotbarFunction)
+                        .setDefaultValue(false)
+                        .setSaveConsumer(newValue -> config.setSegmentedHotbarFunction(newValue))
+                        .setTooltip(Text.of("Make the first press of number keys 1-3 choose section 1-3\nand second press choose the slot from that section\n\nDefault: No"))
+                        .build()
+        );
+
+
         return builder.setTransparentBackground(isTransparent).build();
 
     }

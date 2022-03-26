@@ -2,10 +2,14 @@ package net.blockog.clientsideqol.config;
 
 public class CSQoLConfig {
 
-    public boolean segmentedHotbar = false;
+    public boolean segmentedHotbarVisual = false;
+    public boolean segmentedHotbarFunction = false;
 
-    public void setSegmentedHotbar(boolean segmentedHotbar) {
-        this.segmentedHotbar = segmentedHotbar;
+    public void setSegmentedHotbarVisual(boolean segmentedHotbarVisual) {
+        this.segmentedHotbarVisual = segmentedHotbarVisual;
+    }
+    public void setSegmentedHotbarFunction(boolean segmentedHotbarFunction) {
+        this.segmentedHotbarFunction = segmentedHotbarFunction;
     }
 
 }
