@@ -22,7 +22,7 @@ public class CSQoLConfigGUI {
 
         general.addEntry(
                 configEntryBuilder
-                        .startBooleanToggle(new TranslatableText("text.config.ClientSideQoL.option.maxLevelOnly"), config.segmentedHotbar)
+                        .startBooleanToggle(Text.of("Segmented Hotbar"), config.segmentedHotbar)
                         .setDefaultValue(false)
                         .setSaveConsumer(newValue -> config.setSegmentedHotbar(newValue))
                         .setTooltip(Text.of("Divide hotbar into 3 sections, making it easy to select a slot with just 1-3\nDefault = false"))
