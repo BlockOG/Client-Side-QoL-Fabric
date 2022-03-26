@@ -2,9 +2,12 @@ package net.blockog.clientsideqol.config;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 
-public class CSQoLModMenuIntegration implements ModMenuApi{
+@Environment(EnvType.CLIENT)
+public class CSQoLModMenuIntegration implements ModMenuApi {
 
     CSQoLConfigGUI configGUI = new CSQoLConfigGUI();
 
