@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.Slice;
 @Mixin(MinecraftClient.class)
 public class SegmentedHotbarMixin {
 
-    CSQoLConfig config = ClientSideQoL.getInstance().config;
+   // CSQoLConfig config = ClientSideQoL.getInstance().config;
     int section = 0;
     int slot = 0;
 
@@ -33,7 +33,7 @@ public class SegmentedHotbarMixin {
         )
     )
     private int changeI(int i) {
-        if (config.segmentedHotbarFunction) {
+      //  if (config.segmentedHotbarFunction) {
             if (i < 3) {
                 if (section == 0) {
                     section = i;
@@ -54,9 +54,9 @@ public class SegmentedHotbarMixin {
                     }
                 }
             }
-        } else {
-            return i;
-        }
+     //   } else {
+     //       return i;
+     //   }
         return 0;
     }
 
