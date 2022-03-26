@@ -1,7 +1,7 @@
 package net.blockog.clientsideqol.mixin;
 
-import net.blockog.clientsideqol.ClientSideQoL;
-import net.blockog.clientsideqol.config.CSQoLConfig;
+// import net.blockog.clientsideqol.ClientSideQoL;
+// import net.blockog.clientsideqol.config.CSQoLConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.ClientPlayerEntity;
