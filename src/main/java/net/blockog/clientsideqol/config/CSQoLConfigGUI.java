@@ -14,7 +14,7 @@ public class CSQoLConfigGUI {
     CSQoLConfig config = ClientSideQoL.getInstance().config;
 
     public Screen getConfigScreen(Screen parent, boolean isTransparent) {
-        ConfigBuilder builder = ConfigBuilder.create().setParentScreen(parent).setTitle(new TranslatableText("text.config.ClientSideQoL.title"));
+        ConfigBuilder builder = ConfigBuilder.create().setParentScreen(parent).setTitle(Text.of("Client Side QoL"));
         builder.setDefaultBackgroundTexture(new Identifier("minecraft:textures/block/dirt.png"));
         builder.setSavingRunnable(() -> ClientSideQoL.getInstance().saveConfig());
         ConfigCategory general = builder.getOrCreateCategory(Text.of("general"));
