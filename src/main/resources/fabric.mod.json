@@ -9,15 +9,17 @@
     "BlockOG"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/BlockOG/Client-Side-QoL-Fabric/"
   },
 
-  "license": "CC0-1.0",
+  "license": "GPU",
   "icon": "assets/clientsideqol/icon.png",
 
   "environment": "*",
   "entrypoints": {
+    "modmenu": [
+      "net.blockog.clientsideqol.config.CSQoLModMenuIntegration"
+    ],
     "main": [
       "net.blockog.clientsideqol.ClientSideQoL"
     ]
