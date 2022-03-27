@@ -4,7 +4,7 @@
   "package": "net.blockog.clientsideqol.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
-    "SegmentedHotbarFunction",
+    "MinecraftClientMixin",
     "SHVMixin"
   ],
   "injectors": {
