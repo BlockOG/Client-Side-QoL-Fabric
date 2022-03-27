@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(MinecraftClient.class)
-public class SegmentedHotbarMixin {
+public class SegmentedHotbarFunction {
 
     @Shadow public ClientPlayerEntity player;
     @Shadow @Final public GameOptions options;
