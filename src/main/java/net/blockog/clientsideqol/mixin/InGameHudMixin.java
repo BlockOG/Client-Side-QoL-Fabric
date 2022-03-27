@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = InGameHud.class, priority = 99)
 @Environment(EnvType.CLIENT)
-public class SHVMixin {
+public class InGameHudMixin {
     @Inject(method = "renderHotbar", at = @At(value = "HEAD"), cancellable = true, require = 0)
     private void inventorioRenderSegmentedHotbar(float tickDelta, MatrixStack matrixStack, CallbackInfo ci)
     {
