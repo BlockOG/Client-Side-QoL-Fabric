@@ -21,10 +21,14 @@ public class MinecraftClientMixin {
     @Shadow @Final public GameOptions options;
     @Shadow @Nullable public Screen currentScreen;
 
-    @Redirect(method = "handleInputEvents",
-        at = @At(value = "INVOKE",
+    @Redirect(
+        method = "handleInputEvents",
+        at = @At(
+            value = "INVOKE",
             target = "Lnet/minecraft/client/option/KeyBinding;wasPressed()Z",
-            ordinal = 2))
+            ordinal = 2
+        )
+    )
     private boolean handleHotbarSlotSelection(KeyBinding keyBinding) {
         if (!keyBinding.wasPressed())
             return false;
@@ -39,11 +43,14 @@ public class MinecraftClientMixin {
         return true;
     }
 
-    @Redirect(method = "doItemUse",
-        at = @At(value = "INVOKE",
-            target = "Lnet/minecraft/util/Hand;values()[Lnet/minecraft/util/Hand;"))
-    private Hand[] inventorioDoItemUse()
-    {
+    @Redirect(
+        method = "doItemUse",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/util/Hand;values()[Lnet/minecraft/util/Hand;"
+        )
+    )
+    private Hand[] doItemUse() {
         if (player == null)
             return new Hand[]{};
         return ClientSideQoL.getInstance().handleItemUsage(player);

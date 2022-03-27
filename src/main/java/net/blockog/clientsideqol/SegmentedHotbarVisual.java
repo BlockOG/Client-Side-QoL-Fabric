@@ -15,8 +15,7 @@ import net.minecraft.util.Identifier;
 import java.util.Objects;
 
 @Environment(EnvType.CLIENT)
-public
-class SegmentedHotbarVisual {
+public class SegmentedHotbarVisual {
     private static final Identifier WIDGETS_TEXTURE = new Identifier(ClientSideQoL.MOD_ID, "widgets.png");
     private static final MinecraftClient client = MinecraftClient.getInstance();
 
