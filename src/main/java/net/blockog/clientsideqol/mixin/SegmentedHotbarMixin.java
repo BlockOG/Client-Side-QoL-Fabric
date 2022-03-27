@@ -5,59 +5,55 @@ import net.blockog.clientsideqol.config.CSQoLConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.option.GameOptions;
+import net.minecraft.client.option.KeyBinding;
+import net.minecraft.entity.player.PlayerInventory;
 import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.Slice;
+import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(MinecraftClient.class)
 public class SegmentedHotbarMixin {
 
-    CSQoLConfig config = ClientSideQoL.getInstance().config;
-    int section = 0;
-    int slot = 0;
+    @Shadow public ClientPlayerEntity player;
+    @Shadow @Final public GameOptions options;
+    @Shadow @Nullable public Screen currentScreen;
 
-    @Nullable
-    public Screen currentScreen;
-    @Nullable
-    public ClientPlayerEntity player;
+    private boolean handleSegmentedHotbarSlotSelection(PlayerInventory inventory, int slotToSelect) {
+        ClientSideQoL csqol = ClientSideQoL.getInstance();
+        CSQoLConfig config = csqol.config;
+        if (!config.segmentedHotbarFunction)
+            return false;
+        if (slotToSelect > 2)
+            return true;
 
-    @ModifyVariable(
-        method = "handleInputEvents()V",
-        at = @At(value = "LOAD"),
-        name = "i",
-        slice = @Slice(
-            from = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;isSpectator()Z", ordinal = 0),
-            to = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/ingame/CreativeInventoryScreen;onHotbarKeyPress(Lnet/minecraft/client/MinecraftClient;IZZ)V")
-        )
-    )
-    private int changeI(int i) {
-        if (config.segmentedHotbarFunction) {
-            if (i < 3) {
-                if (section == 0) {
-                    section = i;
-                    if (player != null) {
-                        if (!this.player.isCreative() || this.currentScreen != null) {
-                            return player.getInventory().selectedSlot;
-                        }
-                    }
-                } else {
-                    slot = (section - 1) * i;
-                    section = 0;
-                    return slot;
-                }
-            } else {
-                if (player != null) {
-                    if (!this.player.isCreative() || this.currentScreen != null) {
-                        return player.getInventory().selectedSlot;
-                    }
-                }
-            }
+        if (csqol.selectedHotbarSection == -1) {
+            csqol.selectedHotbarSection = slotToSelect;
         } else {
-            return i;
+            inventory.selectedSlot = slotToSelect + 3 * csqol.selectedHotbarSection;
+            csqol.selectedHotbarSection = -1;
         }
-        return 0;
+        return true;
     }
 
+    @Redirect(method = "handleInputEvents",
+        at = @At(value = "INVOKE",
+            target = "Lnet/minecraft/client/option/KeyBinding;wasPressed()Z",
+            ordinal = 2))
+    private boolean handleHotbarSlotSelection(KeyBinding keyBinding) {
+        if (!keyBinding.wasPressed())
+            return false;
+        if (player.isSpectator())
+            return true;
+
+        if (!player.isCreative() || currentScreen != null || (!options.saveToolbarActivatorKey.isPressed() && !options.loadToolbarActivatorKey.isPressed()))
+            for (int i = 0; i < 9; ++i) {
+                if (keyBinding == options.hotbarKeys[i])
+                    return !handleSegmentedHotbarSlotSelection(player.getInventory(), i);
+            }
+        return true;
+    }
 }

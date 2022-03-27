@@ -18,6 +18,7 @@ public class ClientSideQoL implements ModInitializer {
     public static final String MOD_ID = "clientsideqol";
     public CSQoLConfig config;
     private static ClientSideQoL instance;
+    public int selectedHotbarSection = -1;
 
     public static ClientSideQoL getInstance() {
         return instance;

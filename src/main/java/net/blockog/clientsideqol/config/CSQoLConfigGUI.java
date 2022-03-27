@@ -32,7 +32,7 @@ public class CSQoLConfigGUI {
 
         segmentedHotbar.addEntry(
                 configEntryBuilder
-                        .startBooleanToggle(Text.of("Segmented Hotbar"), config.segmentedHotbarFunction)
+                        .startBooleanToggle(Text.of("Segmented Hotbar Function"), config.segmentedHotbarFunction)
                         .setDefaultValue(false)
                         .setSaveConsumer(newValue -> config.setSegmentedHotbarFunction(newValue))
                         .setTooltip(Text.of("Make the first press of number keys 1-3 choose section 1-3\nand second press choose the slot from that section\n\nDefault: No"))

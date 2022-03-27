@@ -23,9 +23,6 @@
     ],
     "main": [
       "net.blockog.clientsideqol.ClientSideQoL"
-    ],
-    "client": [
-      "net.blockog.clientsideqol.CSQoLKeybinds"
     ]
   },
   "mixins": [
