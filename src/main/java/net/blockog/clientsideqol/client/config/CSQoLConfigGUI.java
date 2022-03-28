@@ -1,4 +1,4 @@
-package net.blockog.clientsideqol.config;
+package net.blockog.clientsideqol.client.config;
 
 import net.blockog.clientsideqol.ClientSideQoL;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;

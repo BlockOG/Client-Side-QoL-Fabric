@@ -1,4 +1,4 @@
-package net.blockog.clientsideqol.mixin;
+package net.blockog.clientsideqol.client.mixin;
 
 import net.blockog.clientsideqol.ClientSideQoL;
 import net.minecraft.client.MinecraftClient;

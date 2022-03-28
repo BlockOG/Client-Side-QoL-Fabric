@@ -1,7 +1,7 @@
 package net.blockog.clientsideqol;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.blockog.clientsideqol.config.CSQoLConfig;
+import net.blockog.clientsideqol.client.config.CSQoLConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -10,6 +10,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Arm;
 import net.minecraft.util.Identifier;
 
 import java.util.Objects;
@@ -65,6 +66,17 @@ public class SegmentedHotbarVisual {
                 64);
         }
 
+        // Draw offhand slot
+        ItemStack offHandStack = playerEntity.getOffHandStack();
+        Arm arm = playerEntity.getMainArm().getOpposite();
+        if (!offHandStack.isEmpty()) {
+            if (arm == Arm.LEFT) {
+                DrawableHelper.drawTexture(matrices, scaledWidthHalved - 91 + 1, scaledHeight - 23, 88, 0, 29, 24, 256, 64);
+            } else {
+                DrawableHelper.drawTexture(matrices, scaledWidthHalved + 91 + 30, scaledHeight - 23, 117, 0, 29, 24, 256, 64);
+            }
+        }
+
         // Draw hotbar items
         for (int slotNum = 0; slotNum < 9; slotNum++) {
             int x = scaledWidthHalved - 62 + (slotNum * 20) + (4 * (slotNum / 3));
@@ -73,6 +85,19 @@ public class SegmentedHotbarVisual {
             client.getItemRenderer().renderInGuiWithOverrides(itemStack, x, y);
             client.getItemRenderer().renderGuiItemOverlay(client.textRenderer, itemStack, x, y);
         }
+
+        // Draw offhand item
+        if (!offHandStack.isEmpty()) {
+            int n = scaledHeight - 16 - 3;
+            if (arm == Arm.LEFT) {
+                client.getItemRenderer().renderInGuiWithOverrides(offHandStack, scaledWidthHalved - 91 + 4, n);
+                client.getItemRenderer().renderGuiItemOverlay(client.textRenderer, offHandStack, scaledWidthHalved - 91 + 4, n);
+            } else {
+                client.getItemRenderer().renderInGuiWithOverrides(offHandStack, scaledWidthHalved + 91 + 40, n);
+                client.getItemRenderer().renderGuiItemOverlay(client.textRenderer, offHandStack, scaledWidthHalved + 91 + 40, n);
+            }
+        }
+
         return true;
     }
 

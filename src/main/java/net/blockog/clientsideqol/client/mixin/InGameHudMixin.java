@@ -1,4 +1,4 @@
-package net.blockog.clientsideqol.mixin;
+package net.blockog.clientsideqol.client.mixin;
 
 import net.blockog.clientsideqol.SegmentedHotbarVisual;
 import net.fabricmc.api.EnvType;
@@ -16,7 +16,8 @@ public class InGameHudMixin {
     @Inject(method = "renderHotbar", at = @At(value = "HEAD"), cancellable = true, require = 0)
     private void inventorioRenderSegmentedHotbar(float tickDelta, MatrixStack matrixStack, CallbackInfo ci)
     {
-        if (SegmentedHotbarVisual.renderSegmentedHotbar(matrixStack))
+        if (SegmentedHotbarVisual.renderSegmentedHotbar(matrixStack)) {
             ci.cancel();
+        }
     }
 }

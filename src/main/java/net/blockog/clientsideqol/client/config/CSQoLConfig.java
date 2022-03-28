@@ -1,4 +1,4 @@
-package net.blockog.clientsideqol.config;
+package net.blockog.clientsideqol.client.config;
 
 public class CSQoLConfig {
 

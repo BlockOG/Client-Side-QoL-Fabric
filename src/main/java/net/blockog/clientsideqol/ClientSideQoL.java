@@ -2,7 +2,7 @@ package net.blockog.clientsideqol;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.blockog.clientsideqol.config.CSQoLConfig;
+import net.blockog.clientsideqol.client.config.CSQoLConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.enchantment.EnchantmentHelper;
