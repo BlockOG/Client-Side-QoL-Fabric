@@ -1,6 +1,7 @@
-package net.blockog.clientsideqol;
+package net.blockog.clientsideqol.client.rendering;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.blockog.clientsideqol.ClientSideQoL;
 import net.blockog.clientsideqol.client.config.CSQoLConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

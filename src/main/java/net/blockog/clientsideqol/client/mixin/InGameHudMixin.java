@@ -1,6 +1,6 @@
 package net.blockog.clientsideqol.client.mixin;
 
-import net.blockog.clientsideqol.SegmentedHotbarVisual;
+import net.blockog.clientsideqol.client.rendering.SegmentedHotbarVisual;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.hud.InGameHud;

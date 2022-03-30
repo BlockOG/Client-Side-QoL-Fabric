@@ -50,6 +50,14 @@ public class CSQoLConfigGUI {
                 .setTooltip(Text.of("Doesn't allow throwing a trident without loyalty\n\nDefault: Yes"))
                 .build()
         );
+        mainHandTweaks.addEntry(
+            configEntryBuilder
+                .startBooleanToggle(Text.of("Rocket Boost From Inventory"), config.rocketBoostFromInventory)
+                .setDefaultValue(false)
+                .setSaveConsumer(newValue -> config.setRocketBoostFromInventory(newValue))
+                .setTooltip(Text.of("When using elytra, jump to boost using rocket from inventory\n\nDefault: No"))
+                .build()
+        );
 
         return builder.setTransparentBackground(isTransparent).build();
 

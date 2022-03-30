@@ -3,15 +3,12 @@ package net.blockog.clientsideqol;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.blockog.clientsideqol.client.config.CSQoLConfig;
+import net.blockog.clientsideqol.client.keybinds.CSQoLKeyHandler;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.Hand;
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,6 +17,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+@Environment(EnvType.CLIENT)
 public class ClientSideQoL implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("ClientSideQoL");
     public static final String MOD_ID = "clientsideqol";
@@ -34,53 +32,9 @@ public class ClientSideQoL implements ModInitializer {
     @Override
     public void onInitialize() {
         loadConfig();
+        ClientTickEvents.START_CLIENT_TICK.register(client -> CSQoLKeyHandler.tick());
+
         instance = this;
-    }
-
-    public boolean canRMBItem(ItemStack item) {
-        if (config.loyaltyTridentCheck && item.getItem() == Items.TRIDENT) {
-            return EnchantmentHelper.getLoyalty(item) > 0;
-        }
-        return true;
-    }
-
-    public boolean handleSegmentedHotbarSlotSelection(PlayerInventory inventory, int slotToSelect) {
-        CSQoLConfig config = this.config;
-        if (!config.segmentedHotbarFunction)
-            return false;
-        if (slotToSelect > 2)
-            return true;
-
-        if (this.selectedHotbarSection == -1) {
-            this.selectedHotbarSection = slotToSelect;
-        } else {
-            inventory.selectedSlot = slotToSelect + 3 * this.selectedHotbarSection;
-            this.selectedHotbarSection = -1;
-        }
-        return true;
-    }
-
-    public Hand[] handleItemUsage(@NotNull PlayerEntity player) {
-        boolean useMainHand = canRMBItem(player.getStackInHand(Hand.MAIN_HAND));
-        boolean useOffHand = canRMBItem(player.getStackInHand(Hand.OFF_HAND));
-
-        Hand[] ret;
-
-        if (useMainHand && useOffHand) {
-            ret = new Hand[2];
-            ret[0] = Hand.MAIN_HAND;
-            ret[1] = Hand.OFF_HAND;
-        } else if (useMainHand) {
-            ret = new Hand[1];
-            ret[0] = Hand.MAIN_HAND;
-        } else if (useOffHand) {
-            ret = new Hand[1];
-            ret[0] = Hand.OFF_HAND;
-        } else {
-            ret = new Hand[0];
-        }
-
-        return ret;
     }
 
     public void loadConfig() {

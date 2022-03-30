@@ -19,7 +19,7 @@
   "environment": "*",
   "entrypoints": {
     "modmenu": [
-      "net.blockog.clientsideqol.config.CSQoLModMenuIntegration"
+      "net.blockog.clientsideqol.client.config.CSQoLModMenuIntegration"
     ],
     "main": [
       "net.blockog.clientsideqol.ClientSideQoL"
