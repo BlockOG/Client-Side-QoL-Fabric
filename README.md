@@ -1,6 +1,6 @@
 # Client Side QoL Fabric
 
-This mod adds a couple of features to the game that make it easier to play. All of these features are client side so the mod does not have to be installed on the server.
+This mod adds client side QoL features for fabric. All of these features are of course client side, as the name implies, so the mod does not have to be installed on the server.
 
 ## Features
 #### Segmented Hotbar
